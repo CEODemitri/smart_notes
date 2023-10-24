@@ -23,12 +23,11 @@ class NotesUpdateView(UpdateView):
     success_url = '/smart/notes'
     form_class = NotesForm
 
-class NotesCreateView(LoginRequiredMixin, CreateView):
+class NotesCreateView(CreateView):
     model: Notes
     # fields: ['title', 'text']
     success_url = '/smart/notes'
     form_class = NotesForm
-    login_url = "/admin"
 
     def form_valid(self, form):
         self.object = form.save(commit=False)
@@ -50,10 +49,9 @@ class NotesDetailsView(DetailView):
     model = Notes
     context_object_name = "note"
 
-
-def detail(request, pk):
-    try:
-        note = Notes.object.get(pk=pk)
-    except Notes.DoesNotExist:
-        raise Http404("Note does not exist in this realm")
-    return render(request, 'notes/notes_detail.html', {'note': note})
+    def detail(request, pk):
+        try:
+            note = Notes.object.get(pk=pk)
+        except Notes.DoesNotExist:
+            raise Http404("Note does not exist in this realm")
+        return render(request, 'notes/notes_detail.html', {'note': note})
