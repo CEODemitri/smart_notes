@@ -19,13 +19,13 @@ class NotesDeleteView(DeleteView):
 
 class NotesUpdateView(UpdateView):
     model = Notes
-    # fields: ['title', 'text']
+    # fields = ['title', 'text']
     success_url = '/smart/notes'
     form_class = NotesForm
 
 class NotesCreateView(CreateView):
     model = Notes
-    # fields: ['title', 'text']
+    # fields = ['title', 'text']
     success_url = '/smart/notes'
     form_class = NotesForm
 
